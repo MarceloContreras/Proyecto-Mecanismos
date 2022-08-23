@@ -1,0 +1,57 @@
+% Esta función calcula las velocidades w3,w4,w5,w6,w7 y w8.
+% x=[AB,BE,DE,AD,EG,FG,BF,CF,CD,GH,theta_10,theta2,t3,t4,t5,t6,t7,t8,w2,w3,w4,w5,w6,w7,w8,alfa_2]
+
+
+function [alfa_3,alfa_4,alfa_5,alfa_6,alfa_7,alfa_8,aH]=find_acel_aceleracion2(x)
+ AB = x(1);
+BE = x(2);     
+DE = x(3);      
+AD = x(4);     
+EG = x(5);     
+FG = x(6);     
+BF = x(7);     
+CF = x(8);
+CD = x(9);
+GH = x(10);
+ 
+theta_10= x(11);
+theta2= x(12);
+
+t3=x(13);
+t4=x(14);
+t5=x(15);
+t6=x(16);
+t7=x(17);
+t8=x(18);
+
+w2=x(19);
+w3=x(20);
+w4=x(21);
+w5=x(22);
+w6=x(23);
+w7=x(24);
+w8=x(25);
+
+alfa_2=x(26);
+
+[e2,n2] = UnitVector(theta2);
+[e3,n3] = UnitVector(t3);
+[e4,n4] = UnitVector(t4);
+[e5,n5] = UnitVector(t5);
+[e6,n6] = UnitVector(t6);
+[~,n7] = UnitVector(t7);
+[~,n8] = UnitVector(t8);
+
+A_v=[BE*n3 -DE*n4 zeros(2,1) zeros(2,1) zeros(2,1) zeros(2,1);
+    BE*n3 zeros(2,1) zeros(2,1) BF*n6 -EG*n7 +FG*n8;
+    zeros(2,1) zeros(2,1) CF*n5 -BF*n6 zeros(2,1) zeros(2,1)];
+B_v=[-AB*w2*n2; zeros(2,1); -AB*w2*n2];
+C= A_v\B_v;
+w3=C(1);
+w4=C(2);
+w5=C(3);
+w6=C(4);
+w7=C(5);
+w8=C(6);
+vH=AB*w2*n2 -BF*w6*n6 -(FG+GH)*w8*n8;
+end
