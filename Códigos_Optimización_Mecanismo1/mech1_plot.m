@@ -52,13 +52,10 @@ function plot_mecanismo1_proyecto(rA,rB,rC,rD,rE,rF,A_path,Hd)
     
     plot(A_path(1,:),A_path(2,:),'g.');
     plot(Hd(1,:),Hd(2,:),'.r')
-    axis equal
-    xlim([-1 1])
-    ylim([-0.9 0.1])
-    grid on
-    hold off
-% figure
-% plot_mecanismo1_proyecto(rA,rB,rC,rD,rE,rF,[0;-1])
+    axis equal,xlim([-1 1]),ylim([-0.9 0.1]),grid on,hold off
+
+    % figure
+    % plot_mecanismo1_proyecto(rA,rB,rC,rD,rE,rF,[0;-1])
      pause(0.01)
     
 end
