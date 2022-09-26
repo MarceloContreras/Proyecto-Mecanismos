@@ -2,7 +2,7 @@
 % puntos rA,rB,rC,rD,rE y rF del mecanismo; asimismo plotea el camino
 % del punto A
 
-function plot_mecanismo1_proyecto(rA,rB,rC,rD,rE,rF,A_path,Hd)
+function mech1_plot(rA,rB,rC,rD,rE,rF,A_path,Hd)
     set(groot,'defaultLineLineWidth',3.0)
     color = [135 206 250]./255;
     

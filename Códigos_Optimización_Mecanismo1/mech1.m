@@ -2,7 +2,6 @@ clc;clear all;close all
 %% Valores iniciales
 
 load("mech1_data_points.mat")
-
 mech1_load_param();
 
 %% Condición de Grashof para el Loop superior

@@ -3,7 +3,7 @@
 % mediante el método de Newton Raphson.
 % x=[AB,BE,DE,AD,EG,FG,BF,CF,CD,GH,theta_10,theta2,t3,t4,t5,t6,t7,t8]
 
-function [xA, xB, xC, xD, xE, xF, xG, xH,theta3,theta4,theta5,theta6,theta7,theta8] = find_pos_mecanismo2(x)
+function [xA, xB, xC, xD, xE, xF, xG, xH,theta3,theta4,theta5,theta6,theta7,theta8] = mech2_findpos(x)
 AB = x(1);
 BE = x(2);     
 DE = x(3);      
