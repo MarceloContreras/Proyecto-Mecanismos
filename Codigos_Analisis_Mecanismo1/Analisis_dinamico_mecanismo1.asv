@@ -123,55 +123,55 @@ end
 
 % PLOTS DE POSICION
 
-% figure(2) % Plot angulo
-% plot(t,t8), grid, xlim([0 T_movimiento])
-% title('\theta_{8} vs Time'), xlabel('Time (s)'), ylabel('Position (rad)')
-% 
-% figure(3) % Plot pos_x vs ang
-% plot((theta_min-theta2)*180/pi,A_path(2,:)), grid, xlim(flip([0 -theta_max*180/pi+theta_min*180/pi]))
-% title('a_{Y} vs \theta_{8}'), xlabel('Position (rad)'), ylabel('Position (m)')
-% 
-% figure(4) % Plot pos_y vs ang
-% plot((theta_min-theta2)*180/pi,A_path(1,:)-A_path(1,1)), grid, xlim(flip([0 -theta_max*180/pi+theta_min*180/pi]))
-% title('a_{X} vs \theta_{8}'), xlabel('Position (rad)'), ylabel('Position (m)')
-%  
-% % PLOTS DE VELOCIDAD
-% 
-% figure(5) % Plot vel_x
-% plot(t,vA(1,:)), grid, xlim([0 T_movimiento])
-% title('vA_{X} vs Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
-%  
-% figure(6) % Plot vel_y
-% plot(t,vA(2,:)), grid, xlim([0 T_movimiento])
-% title('vA_Y vs  Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
-%  
-% figure(7) % Plot ang_vel_8
-% plot(t,w8), grid, xlim([0 T_movimiento])
-% title('\omega_{8} vs  Time'), xlabel('Time (s)'), ylabel('Angular velocity (rad/s)')
-% 
-% figure(8)
-% plot(t,modulo_velocidad), grid, xlim([0 T_movimiento])
-% title('Velocity module vs  Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
-%  
-% %  PLOTEOS ACELERACIÓN
-% 
-% figure(9)
-% plot(t,aA(1,:),'r'), grid, xlim([0 T_movimiento])
-% title('a_{x} vs  Time'), xlabel('Time (s)'), ylabel('Acceleration (m/s^2)')
-%  
-% figure(10)
-% plot(t,aA(2,:)), grid, xlim([0 T_movimiento])
-% title('a_{y} vs  Time'), xlabel('Time (s)'), ylabel('Acceleration (m/s^2)')
-%  
-% figure(11)
-% plot(t,alfa_8), grid, xlim([0 T_movimiento])
-% title('\alpha_{8} vs Time'), xlabel('Time (s)'), ylabel('Acceleration (rad/s^2)')
-%  
-% %  PLOTEOS FUERZAS
-%   
-% figure(12)
-% plot(t,T2), grid, xlim([0 T_movimiento])
-% title('\tau vs Time'), xlabel('Time (s)'), ylabel('Torque (N.m)')
+figure(2) % Plot angulo
+plot(t,t8), grid, xlim([0 T_movimiento])
+title('\theta_{8} vs Time'), xlabel('Time (s)'), ylabel('Position (rad)')
+
+figure(3) % Plot pos_x vs ang
+plot((theta_min-theta2)*180/pi,A_path(2,:)), grid, xlim(flip([0 -theta_max*180/pi+theta_min*180/pi]))
+title('a_{Y} vs \theta_{8}'), xlabel('Position (rad)'), ylabel('Position (m)')
+
+figure(4) % Plot pos_y vs ang
+plot((theta_min-theta2)*180/pi,A_path(1,:)-A_path(1,1)), grid, xlim(flip([0 -theta_max*180/pi+theta_min*180/pi]))
+title('a_{X} vs \theta_{8}'), xlabel('Position (rad)'), ylabel('Position (m)')
+ 
+% PLOTS DE VELOCIDAD
+
+figure(5) % Plot vel_x
+plot(t,vA(1,:)), grid, xlim([0 T_movimiento])
+title('vA_{X} vs Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
+ 
+figure(6) % Plot vel_y
+plot(t,vA(2,:)), grid, xlim([0 T_movimiento])
+title('vA_Y vs  Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
+ 
+figure(7) % Plot ang_vel_8
+plot(t,w8), grid, xlim([0 T_movimiento])
+title('\omega_{8} vs  Time'), xlabel('Time (s)'), ylabel('Angular velocity (rad/s)')
+
+figure(8)
+plot(t,modulo_velocidad), grid, xlim([0 T_movimiento])
+title('Velocity module vs  Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
+ 
+%  PLOTEOS ACELERACIÓN
+
+figure(9)
+plot(t,aA(1,:),'r'), grid, xlim([0 T_movimiento])
+title('a_{x} vs  Time'), xlabel('Time (s)'), ylabel('Acceleration (m/s^2)')
+ 
+figure(10)
+plot(t,aA(2,:)), grid, xlim([0 T_movimiento])
+title('a_{y} vs  Time'), xlabel('Time (s)'), ylabel('Acceleration (m/s^2)')
+ 
+figure(11)
+plot(t,alfa_8), grid, xlim([0 T_movimiento])
+title('\alpha_{8} vs Time'), xlabel('Time (s)'), ylabel('Acceleration (rad/s^2)')
+ 
+%  PLOTEOS FUERZAS
+  
+figure(12)
+plot(t,T2), grid, xlim([0 T_movimiento])
+title('\tau vs Time'), xlabel('Time (s)'), ylabel('Torque (N.m)')
 
 
 %%
