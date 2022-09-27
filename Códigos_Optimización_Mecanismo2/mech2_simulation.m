@@ -15,8 +15,7 @@ function mech2_simulation(vOpt,optimized)
     theta_10= pi-60*pi/180;
 
     H_path=[];
-    k =100;
-    th2 = linspace(270*pi/180,-125*pi/180,k);
+    th2 = linspace(270*pi/180,-125*pi/180,361);
 
     if optimized == 1
         x_init = [vOpt(1:3) AD vOpt(4:7) CD vOpt(8) pi-60*pi/180];

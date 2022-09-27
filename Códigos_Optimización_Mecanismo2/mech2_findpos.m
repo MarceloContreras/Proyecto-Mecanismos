@@ -57,7 +57,7 @@ for z = 1:100  % máximo 100 iteraciones
     t8 = t8 + dq(6);
     
     if norm(phi) < 0.00001
-        disp(strcat('Convergió en la iteración:',num2str(z)));
+        %disp(strcat('Convergió en la iteración:',num2str(z)));
         break
     end
 end

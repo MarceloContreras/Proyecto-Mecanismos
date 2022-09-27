@@ -30,7 +30,7 @@ keySet   = {'3','5','10','13'};
 valueSet = [1 2 3 4];
 dicc     = containers.Map(keySet,valueSet);
 
-num_points = '3'; % Esto se puede cambiar
+num_points = '13'; % Esto se puede cambiar
 
 Hd   = data{2,dicc(num_points)}{1};
 th2d = data{2,dicc(num_points)}{2};
@@ -52,7 +52,7 @@ ub      = 1.1*[AB  BE  DE  EG  FG BF CF GH ];
 x_init=[AB,BE,DE,EG,FG,BF,CF,GH];
 
 %Optimization 
-[vOpt,~,~] = mech2_opt(lb,ub,x_init,'fmincon');
+[vOpt,~,~] = mech2_opt(lb,ub,x_init,'pattern');
 %% Simulation of the optimized mechanism
 
 mech2_simulation(vOpt,1)

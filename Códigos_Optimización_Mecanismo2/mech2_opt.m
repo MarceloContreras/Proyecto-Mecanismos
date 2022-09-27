@@ -23,7 +23,5 @@ function [vOpt,CFi,CF_Opt] = mech2_opt(lb,ub,x_init,solver)
     CFi    = mech2_costfun(x_init); disp(strcat('Initial Cost =',num2str(CFi)));
     CF_Opt = mech2_costfun(vOpt);   disp(strcat('Final Cost =',num2str(CF_Opt)));
     
-    AD = 0.350; CD = 0.330;
-    vOpt=[vOpt(1:3) AD vOpt(4:7) CD vOpt(8) pi-60*pi/180];
 end
 
