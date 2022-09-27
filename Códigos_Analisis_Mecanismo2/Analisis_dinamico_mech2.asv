@@ -3,81 +3,7 @@
 %% Inicialización de variables
 clear all; close all;clc;
 
-% Medida Links y Ángulos
-AB = 0.130;
-BE = 0.420;     % crank length (cm)
-DE = 0.330;     % 
-AD = 0.350;    % 
-EG = 0.430;    % 
-FG = 0.430;    % 
-BF = 0.430;     %
-CF = 0.390;
-CD = 0.330;
-GH = 0.230;
- 
-theta_10= pi-60*pi/180;
-theta_1 = 0;
-
-% Medida de ángulo mínimo y máximo para la simulación
-theta_min=244.825*pi/180;
-theta_max=150*pi/180;
-
-% Tiempo total del movimiento
-T_movimiento=0.85;
-
-% Masa de los links (kg)
-m2=0.171;
-m3=0.546;
-m4=0.431;
-m5=0.467;
-m6=0.537;
-m7=0.536;
-m8=0.757;
-
-% Masa pierna (kg)
-mP=15; 
-
-% Momento de inercia de los links (kg*m^2)
-I2=337.288*10^-6;
-I3=10085.406*10^-6;
-I4=5005.719*10^-6;
-I5=6328.187*10^-6;
-I6=9587.042*10^-6;
-I7=9525.159*10^-6;
-I8=27095.132*10^-6;
-
-%%
-% Cálculo del centro de inercia de los links 
-xbar2=[AB/2;0];
-xbar3=[BE/2;0];
-xbar4=[DE/2;0];
-xbar5=[CF/2;0];
-xbar6=[BF/2;0];
-xbar7=[EG/2;0];
-xbar8=[FG+GH-31.4677/100;0];
-
-% Cálculo del peso de los links (N)
-gravity=9.81;
-W2=[0;-m2*gravity];
-W3=[0;-m3*gravity];
-W4=[0;-m4*gravity];
-W5=[0;-m5*gravity];
-W6=[0;-m6*gravity];
-W7=[0;-m7*gravity];
-W8=[0;-m8*gravity];
-Peso_F=mP*gravity;
-
-Fuerza_H=[0;-Peso_F];
-
-%%
-
-N = 100;
-% N= 1;
-[t3,t4,t5,t6,t7,t8] = deal(zeros(1,N));
-
-% initial guesses for Newton-Raphson algorithm
-theta3 = pi+25*pi/180; theta4 = pi+75*pi/180; theta5 = pi-40*pi/180;
-theta6 = pi-70*pi/180; theta7= pi-65*pi/180; theta8= pi-150*pi/180; % tn means theta_n
+load_param_mech2();
 
 x_init=[AB,BE,DE,AD,EG,FG,BF,CF,CD,GH,theta_10];
 vH=[];
@@ -191,159 +117,103 @@ for k=1:N
     PExt(k) = PF + PW2 + PW3+ PW4 + PW5 + PW6 + PW7 + PW8 + PT; % Total external power
 end
 
-%% INICIO PLOTEOS
+%% PLOTS
  
 % PLOTEOS POSICIÓN
-figure(2)
- plot(t,t8)
- title('Theta8 vs  Tiempo')
- xlabel('Time (s)')
- ylabel('Posición (rad)')
- xlim([0 T_movimiento])
- grid
- 
- figure(3)
- plot(t,H_path(2,:)-H_path(2,1))
- title('H_Y vs  Theta2')
- xlabel('Time (s)')
- ylabel('Posición (m)')
- xlim([0 T_movimiento])
- grid
- 
- figure(4)
- plot(t,H_path(1,:)-H_path(1,1))
- title('H_X vs Theta2')
- xlabel('Time (s)')
- ylabel('Posición (m)')
- xlim([0 T_movimiento])
- grid
- 
- %%  PLOTEOS VELOCIDAD
- 
- figure(5)
- plot(t,v_H(2,:))
- title('vH_Y vs  Tiempo')
- xlabel('Time (s)')
- ylabel('Velocity (m/s)')
- xlim([0 T_movimiento])
- grid
- 
- figure(6)
- plot(t,v_H(1,:))
- title('vH_X vs  Tiempo')
- xlabel('Time (s)')
- ylabel('Velocity (m/s)')
- xlim([0 T_movimiento])
- grid
 
- figure(7)
- plot(t,w8)
- title('w8 vs  Tiempo')
- xlabel('Time (s)')
- ylabel('Angular velocity (rad/s)')
- xlim([0 T_movimiento])
- grid
- 
- %%
- 
-  figure(8)
-  plot(t,alejandro_velocidad)
- title('Modulo Velocidad vs  Tiempo')
- xlabel('Time (s)')
- ylabel('Velocidad(m/s)')
- xlim([0 T_movimiento])
- grid
- 
- hold on
- plot(t,modulo_velocidad)
- plot(Libro1FINAL(:,1),Libro1FINAL(:,4)/100)
- hold off
- legend('Mecanismo 1','Mecanismo 2','Data experimental')
- 
-  %%  PLOTEOS ACELERACIÓN
- 
- figure(9)
- plot(t,a_H(1,:),'g')
- title('Aceleracion X vs  Tiempo')
- xlabel('Time (s)')
- ylabel('Velocity (m/s)')
- xlim([0 T_movimiento])
- grid
- 
-  figure(10)
- plot(t,a_H(2,:),'g')
- title('Aceleracion Y vs  Tiempo')
- xlabel('Time (s)')
- ylabel('Velocity (m/s)')
- xlim([0 T_movimiento])
- grid
- 
-   figure(11)
- plot(t,alfa_8,'g')
- title('Alfa 8 vs Tiempo')
- xlabel('Time (s)')
- ylabel('Acceleration (rad/s^2)')
- xlim([0 T_movimiento])
- grid
- 
-  %%  PLOTEOS FUERZAS
-  
-   figure(12)
- plot(t,T2)
- title('Torque vs Tiempo')
- xlabel('Time (s)')
- ylabel('Torque (N.m)')
- xlim([0 T_movimiento])
- grid
- 
- hold on
-  plot(t,T3)
- hold off
- legend('Mecanismo 1','Mecanismo 2')
- 
- %%
- figure(13)
- %Ploteo de energía externa y cinética
-    plot(t,PKin,'o','Color',[153/255 153/255 153/255])
-    hold on
-    plot(t,PExt,'Color',[0 110/255 199/255],'LineWidth',2)
-    title('External vs. Kinetic Power (Mecanismo 2)')
-    xlabel('Tiempo (s)')
-    ylabel('Power (W)')
-    legend('Kinetic','External')
-    grid on
-    xlim([0 T_movimiento])
+figure(2) % Plot angulo tht_8
+plot(t,t8), grid, xlim([0 T_movimiento])
+title('\theta_{8} vs  Tiempo'), xlabel('Time (s)'), ylabel('Position (rad)')
 
-    %%
-     
+figure(3) % Plot pos h_y
+plot(t,H_path(2,:)-H_path(2,1)), grid, xlim([0 T_movimiento])
+title('H_{y} vs  \theta_{2}'), xlabel('Position (rad)'), ylabel('Position (m)')
+
+figure(4) % Plot pos h_x
+plot(t,H_path(1,:)-H_path(1,1)), grid, xlim([0 T_movimiento])
+title('H_{x} vs \theta_{2}'), xlabel('Time (s)'), ylabel('Position (m)')
+
+%  PLOTEOS VELOCIDAD
+
+figure(5) % Plot vel_y
+plot(t,v_H(2,:)), grid, xlim([0 T_movimiento])
+title('vH_{y} vs Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
+
+figure(6) % Plot vel_x
+plot(t,v_H(1,:)), grid, xlim([0 T_movimiento])
+title('vH_{x} vs Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
+
+figure(7) % Plot w_8
+plot(t,w8), grid, xlim([0 T_movimiento])
+title('\omega_{8} vs Time'), xlabel('Time (s)'), ylabel('Angular velocity (rad/s)')
+
+figure(8) % Plot |v|
+plot(t,sqrt(v_H(1,:).^2 + v_H(2,:).^2)), grid, xlim([0 T_movimiento])
+title('Velocity module vs Time'), xlabel('Time (s)'), ylabel('Velocity (m/s)')
+hold on
+plot(t,sqrt(v_H(1,:).^2 + v_H(2,:).^2))
+plot(Libro1FINAL(:,1),Libro1FINAL(:,4)/100)
+hold off
+legend('Mech 1','Mech 2','Experimental data')
+
+%%  PLOTEOS ACELERACIÓN
+
+figure(9) % Plot acc_x
+plot(t,a_H(1,:),'g'), grid, xlim([0 T_movimiento])
+title('acc_{x} vs  Time'), xlabel('Time (s)'), ylabel('Acceleration (m/s^2)')
+
+figure(10) % Plot acc_y
+plot(t,a_H(2,:),'g'), grid, xlim([0 T_movimiento])
+title('acc_{y} vs  Time'), xlabel('Time (s)'), ylabel('Acceleration (m/s^2)')
+
+figure(11) % Plot alpha_8
+plot(t,alfa_8,'g'), grid, xlim([0 T_movimiento])
+title('\alpha_{8} vs Time'), xlabel('Time (s)'), ylabel('Acceleration (rad/s^2)')
+
+
+%  PLOTEOS FUERZAS
+
+figure(12)
+plot(t,T2), grid, xlim([0 T_movimiento])
+title('\tau vs Time'), xlabel('Time (s)'), ylabel('Torque (N.m)')
+hold on
+plot(t,T3)
+hold off
+legend('Mech 1','Mech 2')
+
+% PLOTEO DE ENERGIA
+
+figure(13)
+%Ploteo de energía externa y cinética
+plot(t,PKin,'o','Color',[153/255 153/255 153/255]), grid, xlim([0 T_movimiento])
+hold on
+plot(t,PExt,'Color',[0 110/255 199/255],'LineWidth',2)
+title('External vs. Kinetic Power (Mecanismo 2)')
+xlabel('Tiempo (s)'), ylabel('Power (W)'), legend('Kinetic','External')
+ 
 % PLOTEOS CRANK
 figure(14)
- plot(t,theta2*180/pi)
- title('\theta_2 vs  Tiempo')
- xlabel('Tiempo (s)')
- ylabel('Posición (°)')
- xlim([0 T_movimiento])
- grid
- 
- 
- 
- figure(15)
- plot(t,w2)
- title('\omega_2 vs  Tiempo')
- xlabel('Tiempo (s)')
- ylabel('Velocidad (rad/s)')
- xlim([0 T_movimiento])
- grid
- 
- 
-  
- figure(16)
- plot(t,alfa_2)
- title('\alpha_2 vs  Tiempo')
- xlabel('Tiempo (s)')
- ylabel('Aceleración (rad/s*2)')
- xlim([0 T_movimiento])
- grid
+plot(t,theta2*180/pi), grid, xlim([0 T_movimiento])
+title('\theta_{2} vs  Tiempo')
+xlabel('Time (s)')
+ylabel('Position (°)')
+grid
+
+figure(15)
+plot(t,w2)
+title('\omega_2 vs  Tiempo')
+xlabel('Tiempo (s)')
+ylabel('Velocidad (rad/s)')
+xlim([0 T_movimiento])
+grid
+
+figure(16)
+plot(t,alfa_2)
+title('\alpha_2 vs  Tiempo')
+xlabel('Tiempo (s)')
+ylabel('Aceleración (rad/s*2)')
+xlim([0 T_movimiento])
+grid
  
  
  
